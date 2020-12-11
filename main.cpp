@@ -192,7 +192,8 @@ int main(int argc, char** argv) {
 		std::cout << *it << '\n';
 	}
 
-	std::cout << "Rekordów: " << buff.size() - 1 << '\n';
-	system("pause");
+	std::cout << "Rzędów: " << buff.size() - 1 << '\n';
+	std::cout << "Aby wyjść z programu należy wcisnąć ENTER.\n";
+	std::cin.get();
 	return 0;
 }
