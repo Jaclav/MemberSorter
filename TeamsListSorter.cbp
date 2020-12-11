@@ -35,6 +35,9 @@
 			<Add library="C:/Program Files (x86)/CodeBlocks/MinGW/x86_64-w64-mingw32/lib/libversion.a" />
 		</Linker>
 		<Unit filename="main.cpp" />
+		<Unit filename="main.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

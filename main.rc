@@ -1,0 +1,20 @@
+1 VERSIONINFO
+FILEVERSION 0,0,0,1{
+	BLOCK "StringFileInfo"{
+		BLOCK "040904E4"{
+			VALUE "CompanyName",""
+			VALUE "LegalCopyright","Jaclav"
+			VALUE "LegalTrademarks","Copyright (C) 2020"
+
+			VALUE "FileDescription","It sorts the list of MS Teams meeting member"
+			VALUE "OriginalFilename","TeamsListSorter.exe"
+			VALUE "ProductName","Teams List Sorter"
+			VALUE "ProductVersion",__DATE__ " " __TIME__
+		}
+	}
+  	BLOCK "VarFileInfo"{
+		VALUE "Translation",0x0415,1200
+	}
+}
+
+mainicon ICON "icon.ico"

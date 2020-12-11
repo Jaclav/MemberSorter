@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
 	system("chcp 65001 > nul");
 	std::string name;
 
-	std::cout << "Copyright (c) 2020 Jaclav Strona: https://github.com/Jaclav/TeamsListSorter\n";
+	std::cout << "Copyright (c) 2020 Jaclav strona: https://github.com/Jaclav/TeamsListSorter wersja: " << __DATE__ << " " << __TIME__ << '\n';
 
 	if(argc < 2) {
 		tagOFNA ofn;
