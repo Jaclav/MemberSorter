@@ -9,6 +9,7 @@ int main(int argc, char** argv) {
 
 	if(argc < 2) {
 		std::cout << "Należy podać ścieżkę pliku .csv!\n";
+		std::cout << "Strona: https://github.com/Jaclav/TeamsListSorter\n";
 		system("pause");
 		return -1;
 	}
