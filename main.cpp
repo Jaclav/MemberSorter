@@ -4,17 +4,37 @@
 #include <iostream>
 #include <vector>
 
+#include <windows.h>
+#include <Commdlg.h>
+
 int main(int argc, char** argv) {
 	system("chcp 65001 > nul");
+	std::string name;
 
 	if(argc < 2) {
-		std::cout << "Należy podać ścieżkę pliku .csv!\n";
-		std::cout << "Strona: https://github.com/Jaclav/TeamsListSorter\n";
-		system("pause");
-		return -1;
+		tagOFNA ofn;
+
+		const int maxInt = 100;
+
+		char fileName[maxInt];
+
+		memset(&ofn, 0, sizeof(tagOFNA));
+
+		ofn.lStructSize = sizeof(tagOFNA);
+		ofn.lpstrFile = fileName;
+		ofn.lpstrFile[0] = '\0';
+		ofn.nMaxFile = maxInt;
+		ofn.lpstrFilter = "Executable files\0*.exe\0";
+		ofn.nFilterIndex = 1;
+
+		GetOpenFileName(&ofn);
+		name = ofn.lpstrFile;
+	}
+	else{
+		name = argv[1];
 	}
 
-	std::fstream file(argv[1], std::ios::in);
+	std::fstream file(name, std::ios::in);
 	if(!file.good()) {
 		std::cout << "Plik nie istnieje!\n";
 		system("pause");
