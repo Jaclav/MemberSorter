@@ -14,17 +14,13 @@ int main(int argc, char** argv) {
 
 	if(argc < 2) {
 		tagOFNA ofn;
-
-		const int maxInt = 100;
-
-		char fileName[maxInt];
-
+		char fileName[100];
 		memset(&ofn, 0, sizeof(tagOFNA));
 
 		ofn.lStructSize = sizeof(tagOFNA);
 		ofn.lpstrFile = fileName;
 		ofn.lpstrFile[0] = '\0';
-		ofn.nMaxFile = maxInt;
+		ofn.nMaxFile = 100;
 		ofn.lpstrFilter = "Lista Teams *.csv\0*.csv\0";
 		ofn.nFilterIndex = 1;
 
@@ -50,129 +46,73 @@ int main(int argc, char** argv) {
 	for(unsigned int ctr = 0; getline(file, line); ctr++) {
 		buff.push_back("");
 
-		//delete dots between chars
 		for(unsigned int i = 0; i < line.size(); i ++) {
-			if(line[i] != 0) {
+			if(line[i] != 0) {//delete dots between chars
 				//convert polish characters to ASCII
-				switch((unsigned int)line[i]) {
-					case  4294967283: {//ó
-						buff[ctr].push_back('o');
-						break;
-					}
-					case 4294967251: {//Ó
-						buff[ctr].push_back('O');
-						break;
-					}
-					case 1: {//ą
-						if(line[i - 1] == 4) { //Ą
-							buff[ctr].pop_back();
-							buff[ctr].push_back('A');
-							break;
-						}
-						else if(line[i - 1] == 5) { //ą
-							buff[ctr].pop_back();
-							buff[ctr].push_back('a');
-							break;
-						}
-					}
-					case 6: {//ć
-						buff[ctr].push_back('C');
-						i++;
-						break;
-					}
-					case 7: {//ć
-						buff[ctr].push_back('c');
-						i++;
-						break;
-					}
-					case 24: {//Ę
-						buff[ctr].push_back('E');
-						i++;
-						break;
-					}
-					case 25: {//ę
-						buff[ctr].push_back('e');
-						i++;
-						break;
-					}
-					case 65: {//Ł
-						if(line[i + 1] == 1) {
-							buff[ctr].push_back('L');
-							i++;
-						}
-						else {
-							buff[ctr].push_back(line[i]);
-						}
-						break;
-					}
-					case 66: {//ł
-						if(line[i + 1] == 1) {
-							buff[ctr].push_back('l');
-							i++;
-						}
-						else {
-							buff[ctr].push_back(line[i]);
-						}
-						break;
-					}
-					case 68: {//ń
-						if(line[i + 1] == 1) {
-							buff[ctr].push_back('n');
-							i++;
-						}
-						else {
-							buff[ctr].push_back(line[i]);
-						}
-						break;
-					}
-					case 90: {
-						if(line[i + 1] == 1) {
-							buff[ctr].push_back('S');
-							i++;
-						}
-						else {
-							buff[ctr].push_back('Z');
-							i++;
-						}
-						break;
-					}
-					case 91: {//ś
-						buff[ctr].push_back('s');
-						i++;
-						break;
-					}
-					case 121: {//Ź
-						if(line[i + 1] == 1) {
-							buff[ctr].push_back('Z');
-							i++;
-							break;
-						}
-						else {
-							buff[ctr].push_back(line[i]);
-							break;
-						}
-					}
-					case 122: {//ź
-						buff[ctr].push_back('z');
-						i++;
-						break;
-					}
-					case 123: {//Ź
-						if(line[i + 1] == 1) {
-							buff[ctr].push_back('Z');
-							i++;
-							break;
-						}
-					}
-					case 124: {//ż
-						buff[ctr].push_back('z');
-						i++;
-						break;
-					}
-					default: {
-						buff[ctr].push_back(line[i]);
-						break;
-					}
+				if((unsigned int) line[i] == 4294967283) { //ó
+					buff[ctr].push_back('o');
+				}
+				else if((unsigned int) line[i] == 4294967251) { //Ó
+					buff[ctr].push_back('O');
+				}
+				else if(line[i] == 1 && line[i - 1] == 4) { //Ą
+					buff[ctr].pop_back();
+					buff[ctr].push_back('A');
+				}
+				else if(line[i] == 1 && line[i - 1] == 5) { //ą
+					buff[ctr].pop_back();
+					buff[ctr].push_back('a');
+				}
+				else if(line[i] == 6) { //Ć
+					buff[ctr].push_back('C');
+					i++;
+				}
+				else if(line[i] == 7) { //ć
+					buff[ctr].push_back('c');
+					i++;
+				}
+				else if(line[i] == 24) { //Ę
+					buff[ctr].push_back('E');
+					i++;
+				}
+				else if(line[i] == 25) { //ę
+					buff[ctr].push_back('e');
+					i++;
+				}
+				else if(line[i] == 65 && line[i + 1] == 1) { //Ł
+					buff[ctr].push_back('L');
+					i++;
+				}
+				else if(line[i] == 66 && line[i + 1] == 1) { //ł
+					buff[ctr].push_back('l');
+					i++;
+				}
+				else if(line[i] == 67 && line[i + 1] == 1) { //Ń
+					buff[ctr].push_back('N');
+					i++;
+				}
+				else if(line[i] == 68 && line[i + 1] == 1) { //ń
+					buff[ctr].push_back('n');
+					i++;
+				}
+				else if(line[i] == 90 && line[i + 1] == 1) { //Ś
+					buff[ctr].push_back('S');
+					i++;
+				}
+				else if(line[i] == 91) { //ś
+					buff[ctr].push_back('s');
+					i++;
+				}
+				else if((line[i] == 121 || line[i] == 123) && line[i + 1] == 1) { //Ź or Ż
+					buff[ctr].push_back('Z');
+					i++;
+				}
+				else if(line[i] == 122 || line[i] == 124) { //ź or ż
+					buff[ctr].push_back('z');
+					i++;
+				}
+				else {
+					buff[ctr].push_back(line[i]);
 				}
 			}
 		}
