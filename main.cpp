@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
 		ofn.lpstrFile = fileName;
 		ofn.lpstrFile[0] = '\0';
 		ofn.nMaxFile = maxInt;
-		ofn.lpstrFilter = "Executable files\0*.exe\0";
+		ofn.lpstrFilter = "Lista Teams*.csv\0*.csv\0";
 		ofn.nFilterIndex = 1;
 
 		GetOpenFileName(&ofn);
