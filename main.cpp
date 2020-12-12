@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
 		system(std::string("echo timeout /t 1 > " + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
 		system(std::string("echo del " +  std::string(argv[0]) + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
 		system(std::string("echo move " + std::string(getenv("Temp")) + "\\TeamsListSorter.exe " + argv[0] + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
-		system(std::string("echo call " + std::string(argv[0]) + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
+		system(std::string("echo start " + std::string(argv[0]) + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
 
 		system(std::string("start " + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
 		return 0;
@@ -51,10 +51,8 @@ int main(int argc, char** argv) {
 
 		ofn.lStructSize = sizeof(tagOFNA);
 		ofn.lpstrFile = fileName;
-		ofn.lpstrFile[0] = '\0';
 		ofn.nMaxFile = 100;
 		ofn.lpstrFilter = "Lista Teams *.csv\0*.csv\0";
-		ofn.nFilterIndex = 1;
 
 		GetOpenFileName(&ofn);
 		name = ofn.lpstrFile;
