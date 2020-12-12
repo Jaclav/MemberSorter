@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
 		system(std::string("echo move " + std::string(getenv("Temp")) + "\\TeamsListSorter.exe " + argv[0] + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
 		system(std::string("echo start " + std::string(argv[0]) + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
 
-		system(std::string("start " + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
+		system(std::string("call " + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
 		return 0;
 	}
 
