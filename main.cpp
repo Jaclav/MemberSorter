@@ -23,6 +23,7 @@ bool inline isUpdateAvailable(void) {
 
 int main(int argc, char** argv) {
 	system("chcp 65001 > nul");
+	system("cls");
 	std::string name;
 
 	std::cout << "Copyright (c) 2020 Jaclav strona: https://github.com/Jaclav/TeamsListSorter wersja: " << version << '\n';
