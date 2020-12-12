@@ -8,7 +8,7 @@ FILEVERSION 0,0,0,1{
 			VALUE "LegalCopyright","Jaclav"
 			VALUE "LegalTrademarks","Copyright (C) 2020"
 
-			VALUE "FileDescription","It sorts the list of MS Teams meeting member"
+			VALUE "FileDescription","Teams list sorter"
 			VALUE "OriginalFilename","TeamsListSorter.exe"
 			VALUE "ProductName","Teams List Sorter"
 			VALUE "ProductVersion",version
