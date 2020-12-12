@@ -6,11 +6,40 @@
 #include <windows.h>
 #include <Commdlg.h>//must be after windows.h
 
+#include "version.hpp"
+
+bool inline isUpdateAvailable(void) {
+	URLDownloadToFile(NULL, "https://raw.githubusercontent.com/Jaclav/TeamsListSorter/main/version.hpp",
+	                  std::string(std::string(getenv("Temp")) + "\\version.txt").c_str(), 0, NULL);
+	std::fstream file(std::string(getenv("Temp")) + "\\version.txt", std::ios::in);
+	std::string line;
+
+	getline(file, line);
+	line = line.substr(line.find("\"") + 1, line.size());
+	line = line.substr(0, line.find("\""));
+
+	return line != version;
+}
+
 int main(int argc, char** argv) {
 	system("chcp 65001 > nul");
 	std::string name;
 
-	std::cout << "Copyright (c) 2020 Jaclav strona: https://github.com/Jaclav/TeamsListSorter wersja: " << __DATE__ << " " << __TIME__ << '\n';
+	std::cout << "Copyright (c) 2020 Jaclav strona: https://github.com/Jaclav/TeamsListSorter wersja: " << version << '\n';
+
+	if(isUpdateAvailable() && MessageBoxW(NULL, L"Nowa aktualizacja jest dostępna, czy ją pobrać?", L"Aktualizacja",
+	                                      MB_YESNO | MB_APPLMODAL | MB_DEFAULT_DESKTOP_ONLY | MB_ICONQUESTION) == IDYES) {
+		URLDownloadToFile(NULL, "https://raw.githubusercontent.com/Jaclav/TeamsListSorter/main/bin/TeamsListSorter.exe",
+		                  std::string(std::string(getenv("Temp")) + "\\TeamsListSorter.exe").c_str(), 0, NULL);
+
+		system(std::string("echo timeout /t 1 > " + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
+		system(std::string("echo del " +  std::string(argv[0]) + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
+		system(std::string("echo move " + std::string(getenv("Temp")) + "\\TeamsListSorter.exe " + argv[0] + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
+		system(std::string("echo call " + std::string(argv[0]) + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
+
+		system(std::string("start " + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
+		return 0;
+	}
 
 	if(argc < 2) {
 		tagOFNA ofn;

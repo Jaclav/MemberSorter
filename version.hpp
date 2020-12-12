@@ -1,1 +1,1 @@
-#define version "1"
+#define version "1.0"
