@@ -14,6 +14,7 @@ bool inline isUpdateAvailable(void) {
 	std::fstream file(std::string(getenv("Temp")) + "\\version.txt", std::ios::in);
 	std::string line;
 
+	//extract version
 	getline(file, line);
 	line = line.substr(line.find("\"") + 1, line.size());
 	line = line.substr(0, line.find("\""));
@@ -23,6 +24,7 @@ bool inline isUpdateAvailable(void) {
 
 int main(int argc, char** argv) {
 	system("chcp 65001 > nul");
+	system("title Teams list sorter");
 	system("cls");
 	std::string name;
 
@@ -149,6 +151,7 @@ int main(int argc, char** argv) {
 	}
 	file.close();
 
+	//set surname as first, name as last and delete information about class
 	for(unsigned int i = 0; i < buff.size(); i++) {
 		if(buff[i][0] < 58) {
 			buff[i] = buff[i].substr(buff[i].find(" ") + 1);
