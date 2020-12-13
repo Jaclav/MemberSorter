@@ -11,4 +11,4 @@ Po tym zostanie wyświetlona posortowana według nazwiska lista uczestników.
 Program nie ma certyfikatu więc może być uznawany za wirusa.\
 Aby uruchomić mimo to należy wejść w "Więcej informacji", a następnie "Uruchom mimo to".
 
-Jeżeli w nazwie katalogu są polskie znaki, program nie otwozy pliku
+Jeżeli w nazwie katalogu są polskie znaki, program nie otwoży pliku, należy wtedy zmienić nazwę katalogu.
