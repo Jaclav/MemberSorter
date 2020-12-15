@@ -1,3 +1,4 @@
 obj/
-*.layout
+*.csv
 *.depend
+*.layout

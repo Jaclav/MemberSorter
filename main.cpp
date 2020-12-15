@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 	system("cls");
 	std::string name;
 
-	std::cout << "Copyright (c) 2020 Jaclav strona: https://github.com/Jaclav/TeamsListSorter v" << version << '\n';
+	std::cout << "Copyright (c) 2020 Jaclav strona: https://github.com/Jaclav/TeamsListSorter v" << version << "\n\n";
 
 	if(isUpdateAvailable() && MessageBoxW(NULL, L"Nowa aktualizacja jest dostępna, czy ją pobrać?", L"Aktualizacja",
 	                                      MB_YESNO | MB_APPLMODAL | MB_DEFAULT_DESKTOP_ONLY | MB_ICONQUESTION) == IDYES) {
@@ -69,6 +69,7 @@ int main(int argc, char** argv) {
 	if(!file.good()) {
 		std::cout << "Plik nie istnieje bądź nie można go otworzyć!\nAby wyjść z programu należy wcisnąć ENTER.\n";
 		std::cin.get();
+		return 0;
 	}
 	std::vector<std::string>buff;
 
@@ -149,6 +150,12 @@ int main(int argc, char** argv) {
 				}
 			}
 		}
+
+		if(buff[ctr].size() == 0) { //if line is empty, skip it
+			buff.pop_back();
+			ctr--;
+			continue;
+		}
 	}
 	file.close();
 
@@ -166,7 +173,7 @@ int main(int argc, char** argv) {
 		std::cout << *it << '\n';
 	}
 
-	std::cout << "Rzędów: " << buff.size() - 1 << '\n';
+	std::cout << "Rzędów: " << buff.size() << '\n';
 	std::cout << "Aby wyjść z programu należy wcisnąć ENTER.\n";
 	std::cin.get();
 	return 0;
