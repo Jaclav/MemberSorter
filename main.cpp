@@ -28,30 +28,34 @@ int main(int argc, char** argv) {
 	system("cls");
 	std::string name;
 
-	std::cout << "Copyright (c) 2020 Jaclav strona: https://github.com/Jaclav/TeamsListSorter wersja: " << version << '\n';
+	std::cout << "Copyright (c) 2020 Jaclav strona: https://github.com/Jaclav/TeamsListSorter v" << version << '\n';
 
 	if(isUpdateAvailable() && MessageBoxW(NULL, L"Nowa aktualizacja jest dostępna, czy ją pobrać?", L"Aktualizacja",
 	                                      MB_YESNO | MB_APPLMODAL | MB_DEFAULT_DESKTOP_ONLY | MB_ICONQUESTION) == IDYES) {
 		URLDownloadToFile(NULL, "https://raw.githubusercontent.com/Jaclav/TeamsListSorter/main/bin/TeamsListSorter.exe",
 		                  std::string(std::string(getenv("Temp")) + "\\TeamsListSorter.exe").c_str(), 0, NULL);
 
-		system(std::string("echo timeout /t 1 > " + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
-		system(std::string("echo del " +  std::string(argv[0]) + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
-		system(std::string("echo move " + std::string(getenv("Temp")) + "\\TeamsListSorter.exe " + argv[0] + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
-		system(std::string("echo start " + std::string(argv[0]) + ">>" + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
+		std::fstream file(std::string(getenv("Temp")) + "\\TeamsListSorter.bat", std::ios::out);
+		file << "timeout /t 1\n";
+		file << "del " << argv[0] << '\n';
+		file << "move " << getenv("Temp") << "\\TeamsListSorter.exe " << argv[0] << '\n';
+		file << "call " << argv[0] << '\n';
+		file << "exit\n";
+		file.close();
 
-		system(std::string("call " + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
+		system(std::string("start " + std::string(getenv("Temp")) + "\\TeamsListSorter.bat").c_str());
 		return 0;
 	}
 
 	if(argc < 2) {
 		tagOFNA ofn;
-		char fileName[100];
+		char fileName[120];
 		memset(&ofn, 0, sizeof(tagOFNA));
 
 		ofn.lStructSize = sizeof(tagOFNA);
 		ofn.lpstrFile = fileName;
-		ofn.nMaxFile = 100;
+		ofn.lpstrFile[0] = '\0';
+		ofn.nMaxFile = 120;
 		ofn.lpstrFilter = "Lista Teams *.csv\0*.csv\0";
 
 		GetOpenFileName(&ofn);
@@ -63,9 +67,8 @@ int main(int argc, char** argv) {
 
 	std::fstream file(name, std::ios::in);
 	if(!file.good()) {
-		std::cout << "Plik nie istnieje!\n";
-		system("pause");
-		return -1;
+		std::cout << "Plik nie istnieje bądź nie można go otworzyć!\nAby wyjść z programu należy wcisnąć ENTER.\n";
+		std::cin.get();
 	}
 	std::vector<std::string>buff;
 
