@@ -13,3 +13,5 @@ Program nie ma certyfikatu więc może być uznawany za potencjalne zagrożenie.
 Aby uruchomić mimo to należy wejść w "Więcej informacji", a następnie "Uruchom mimo to".
 
 Jeżeli w nazwie katalogu są polskie znaki, program nie otwoży pliku, należy wtedy zmienić nazwę katalogu.
+
+W wersjach sprzed 1.5 automatyczna aktualizacja nie działa, poprawione od 1.5
